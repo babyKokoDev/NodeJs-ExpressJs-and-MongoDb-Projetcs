@@ -1,0 +1,1 @@
+const connectionString = "mongodb+srv://Babykoko:<password>@cluster0.1gqmign.mongodb.net/?retryWrites=true&w=majority"
