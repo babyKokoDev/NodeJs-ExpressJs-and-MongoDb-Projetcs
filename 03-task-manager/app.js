@@ -8,6 +8,7 @@ require('dotenv').config()
 
 
 // Middleware
+app.use(express.static('./public'))
 app.use(express.json())
 
 
@@ -17,6 +18,7 @@ app.use(notFound)
 app.use(errorHandlerMiddleware)
 
 const port = 5000
+
 
 const start = async () => {
     try {
