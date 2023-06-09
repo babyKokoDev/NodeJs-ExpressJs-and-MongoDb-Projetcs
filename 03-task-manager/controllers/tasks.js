@@ -1,51 +1,35 @@
+const asyncWrapper = require('../middleware/async')
 const Task = require('../models/Task')
 
-const getAllTasks = async (req, res) => {
-    try {
+const getAllTasks = asyncWrapper ( async (req, res) => {
        const task = await Task.find({}) 
        res.status(200).json({task})
-    } catch (error) {
-        res.status(500).json({ msg: error })
-    }   
-}
+})
 
-const createTask = async (req, res) => {
-    try {
+const createTask = asyncWrapper ( async (req, res) => {
         const task = await Task.create(req.body)
         res.status(201).json({ task })
-    } catch (error) {
-        res.status(500).json({ msg: error })
-    }
-}
+})
 
-const getTask = async (req, res) => {
-    try {
+const getTask = asyncWrapper ( async (req, res) => {
       const {id : TaskId} = req.params
       const task = await Task.findOne({_id : TaskId})
       if (!task){
         return res.status(404).json({msg : `No task in id ${TaskId}`})
       }
       res.status(200).json({ task })
-    } catch (error) {
-        res.status(500).json({ msg: error })
-    }
-}
+})
 
-const deleteTask = async (req, res) => {
-    try {
+const deleteTask = asyncWrapper ( async (req, res) => {
           const {id : taskId} = req.params
           const task = await Task.findOneAndDelete({_id : taskId})
           if (!task) {
             return res.status(404).json({msg : `No task in id ${TaskId}`})
           }
           res.status(200).json({task})
-    } catch (error) {
-        res.status(500).json({ msg: error })
-    }
-}
+})
 
-const updateTasks = async (req, res) => {
-    try {
+const updateTasks = asyncWrapper ( async (req, res) => {
         const {id : taskId} = req.params
         const task = await Task.findOneAndUpdate({_id : taskId}, req.body, {
             new : true,
@@ -55,10 +39,8 @@ const updateTasks = async (req, res) => {
             return res.status(404).json({msg : `No task in id ${TaskId}`})
           }
         res.status(200).json({task})
-    } catch (error) {
-        res.status(500).json({ msg: error })
-    }
-}
+})
+
 module.exports = {
     getAllTasks,
     createTask,
