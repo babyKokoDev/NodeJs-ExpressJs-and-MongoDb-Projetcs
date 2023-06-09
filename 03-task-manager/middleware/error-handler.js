@@ -1,7 +1,6 @@
-const { CustomAPIError } = require("../controllers/errors/custom-error")
+const { CustomAPIError } = require("../errors/custom-error")
 
-
-const errorHandlerMiddleware = (err,req, res, next) => {
+const errorHandlerMiddleware = (err, req, res, next) => {
     if (err instanceof CustomAPIError) {
         return res.status(err.statusCode).json({msg : err.message})
     }
